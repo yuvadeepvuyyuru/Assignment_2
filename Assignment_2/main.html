@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Anagram Engine</title>
+	</head>
+	<body>
+    <style>
+        body {background-color: cornsilk;}
+        h1 {color: firebrick}
+	</style>
+		<header>
+            <h1> <center><strong>Anagram Engine</strong></center></h1>
+                <div style="float:right; width:70%; text-align: right;">
+					<p class="sub-headline">Welcome {{ user.email() }} </p>
+					<div style="float:right; width:25%;">
+						<a href="{{ url }}">
+							<div class="button_element">sign Out</div>
+						</a>
+					</div>
+				</div>
+		</header>
+		<div class="header">
+            <p>Unique Anagrams: {{ wordCount }};
+            <br/>Total words in the list: {{ totalCount }};</p>
+		</div>
+		<div class="content">
+			<form action="/" method="post">
+			    Select a file to upload
+			    <input type="file" name="uploadFile">
+			    <input type="submit" name="button" value="Upload">
+			</form>
+			<form method="get" action="/addWord?">
+				<tr>
+					<td id="button_row">
+						<input type="submit" class="button" name="Add word" value="Add word">
+                    </td>
+                </tr>
+            </form>
+			<table>
+				<form method="post" action="/">
+					<tr>
+						<td>
+							<input type="text" class="text_input" name="value" placeholder="Search Anagrams" onkeypress="return onlyAlphabets(event,this);"/>
+						</td>
+						<td id="button_row">
+							<input type="submit" class="button" name="button" value="Search"/>
+                        <br>
+                        </td>
+                    </tr>
+                </form>
+                <form method="post" action="/">
+                    <tr>
+                        <td>
+                            <input type="text" class="text_input" name="value" placeholder="Auto Generate Anagrams" onkeypress="return onlyAlphabets(event,this);">
+                        </td>
+                        <td id="button_row">
+                            <input type="submit" class="button" name="button" value="Generate">
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <form method="get" action="/">
+                <table>
+                    <tr>
+                        <th colspan="2">
+                            Anagrams available:
+                        </th>
+                    </tr>
+                    {% for anagram in anagrams %}
+
+                    <tr>
+                        <td class="anagram_table_data_sortedWord">
+                            <b>{{ anagram.sorted_word }}</b>
+                        </td>
+                        <td class="anagram_table_data">
+                        {% for word in anagram.words %}
+                            {% if loop.index == anagram.words | length %}
+                                {{ word }}
+                            {% else %}
+                                {{ word }},
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

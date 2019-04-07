@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Search Results</title>
+</head>
+
+<br>
+  <header>
+      <h1><center>Anagram Engine</center></h1>
+      <div style="float:right; width:50%; text-align: right;">
+          <p class="sub-headline">You are logged in as {{ user.email() }}</p>
+      </div>
+  </header>
+<div class="header">
+    <div style="float:left; width:70%; text-align: left;">
+        Search Results
+    </div>
+</div>
+
+<div class="content">
+        {% if search_result %}
+            <table>
+                <tr>
+                    <th>
+                        These are the anagrams of "{{ search_term }}":
+                    </th>
+                </tr>
+                {% for item in search_result %}
+                    <tr>
+                        <td class="anagram_table_data">{{ item }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            No anagrams found for this word<br>
+        {% endif %}
+        <br/>
+        <form method="get" action="/" align="right">
+          <tr>
+            <td id="button_row">
+              <input type="submit" class="button" name="cancel" value="Cancel">
+            </td>
+          </tr>
+        </form>
+</div>
+<style>
+        body {background-color: cornsilk;}
+        h1 {color: firebrick}
+</style>
+
+</body>
+</html>
